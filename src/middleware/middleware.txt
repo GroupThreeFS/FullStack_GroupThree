@@ -1,0 +1,1 @@
+/*Contains middleware functions, like authentication and error handling*/

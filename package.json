@@ -1,0 +1,14 @@
+{
+  "name": "fullstack_groupthree",
+  "version": "1.0.0",
+  "description": "The Final Sprint Project showcasing our knowledge of interacting node js with mongo db and postgres sql to create a search function similar to google.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

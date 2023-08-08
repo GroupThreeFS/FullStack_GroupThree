@@ -1,0 +1,1 @@
+/*Our logging function for all pages should go here, we want to log search querys*/

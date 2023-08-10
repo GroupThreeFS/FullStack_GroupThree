@@ -1,6 +1,6 @@
-require('dotenv').config();
-const express = require('express');
 const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const express = require('express');
 //const searchRoutes = require('../src/routes/searchRoutes');
 const otherRoutes = require('../src/routes/otherRoutes');
 const errorHandling = require('../src/middleware/errorHandling');

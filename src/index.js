@@ -1,8 +1,10 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const express = require('express');
-//const searchRoutes = require('../src/routes/searchRoutes');
+const searchRoutes = require('../src/routes/search');
+const apiRoutes = require('../src/routes/apiRoutes');
 const otherRoutes = require('../src/routes/otherRoutes');
+
 const errorHandling = require('../src/middleware/errorHandling');
 
 const app = express();
@@ -20,7 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Routes
-//app.use('/search', searchRoutes);
+app.use('/api', apiRoutes);
+app.use('/search', searchRoutes);
 app.use('/', otherRoutes);
 
 // Error handling middleware

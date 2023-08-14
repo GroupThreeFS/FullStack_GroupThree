@@ -15,7 +15,7 @@ pool.connect((err) => {
   if (err) {
     console.error(chalk.red('Error connecting to PostgreSQL:'), err);
   } else {
-    console.log(chalk.green('Connected to') + ' ' + rainbowText('PostgreSQL'));
+    console.log(chalk.green('+ Connected to') + ' ' + rainbowText('PostgreSQL'));
   }
 });
 

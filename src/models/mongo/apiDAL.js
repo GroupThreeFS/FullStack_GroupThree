@@ -9,27 +9,58 @@ exports.getAllGames = async () => {
     return await collection.find({}).toArray();
 };
 
-exports.getGameById = async (gameId) => {
+exports.getGameById = async (gameid) => {
     const collection = db.collection('Game');
-    return await collection.findOne({ _id: ObjectID(gameId) });
+    
+    // Convert gameid to integer
+    gameid = parseInt(gameid);
+    
+    console.log("Fetching game with ID:", gameid);
+    
+    try {
+        return await collection.findOne({ GameID: { $eq: gameid } });
+    } catch (error) {
+        console.error("Error fetching game by ID:", error);
+        return null;
+    }
 };
 
-exports.getGameDeveloper = async (gameId) => {
+exports.getGameDeveloper = async (gameid) => {
     const collection = db.collection('Game');
-    const game = await collection.findOne({ _id: ObjectID(gameId) });
+    
+    // Convert gameid to integer
+    gameid = parseInt(gameid);
+    
+    const game = await collection.findOne({ GameID: gameid });
     if (game) {
         const developersCollection = db.collection('Developer');
-        return await developersCollection.findOne({ _id: ObjectID(game.developerId) });
+        
+        // Convert game.DevevloperID to integer (if it's not already)
+        const developerIdInt = parseInt(game.DevevloperID);
+        
+        return await developersCollection.findOne({ DeveloperID: developerIdInt });
     }
     return null;
 };
 
-exports.getGameConsole = async (gameId) => {
+exports.getGameConsole = async (gameid) => {
     const collection = db.collection('Game');
-    const game = await collection.findOne({ _id: ObjectID(gameId) });
+    
+    // Convert gameid to integer
+    gameid = parseInt(gameid);
+    
+    const game = await collection.findOne({ GameID: gameid });
+    console.log("Fetched game:", game); // Log the fetched game
+
     if (game) {
         const consolesCollection = db.collection('Console');
-        return await consolesCollection.findOne({ _id: ObjectID(game.consoleId) });
+        
+        // Convert game.ConsoleID to integer (if it's not already)
+        const consoleIdInt = parseInt(game.ConsoleID);
+        
+        const consoleData = await consolesCollection.findOne({ PlatformID: consoleIdInt });
+        console.log("Fetched console:", consoleData); // Log the fetched console
+        return consoleData;
     }
     return null;
 };
@@ -39,9 +70,20 @@ exports.getAllDevelopers = async () => {
     return await collection.find({}).toArray();
 };
 
-exports.getDeveloperById = async (developerId) => {
+exports.getDeveloperById = async (developerid) => {
     const collection = db.collection('Developer');
-    return await collection.findOne({ _id: ObjectID(developerId) });
+    
+    // Convert developerid to integer
+    developerid = parseInt(developerid);
+    
+    console.log("Fetching developer with DeveloperID:", developerid);
+    
+    try {
+        return await collection.findOne({ DeveloperID: { $eq: developerid } });
+    } catch (error) {
+        console.error("Error fetching developer by DeveloperID:", error);
+        return null;
+    }
 };
 
 exports.getAllConsoles = async () => {
@@ -49,8 +91,19 @@ exports.getAllConsoles = async () => {
     return await collection.find({}).toArray();
 };
 
-exports.getConsoleById = async (consoleId) => {
+exports.getConsoleById = async (platformid) => {
     const collection = db.collection('Console');
-    return await collection.findOne({ _id: ObjectID(consoleId) });
+    
+    // Convert platformid to integer
+    platformid = parseInt(platformid);
+    
+    console.log("Fetching console with PlatformID:", platformid);
+    
+    try {
+        return await collection.findOne({ PlatformID: { $eq: platformid } });
+    } catch (error) {
+        console.error("Error fetching console by PlatformID:", error);
+        return null;
+    }
 };
 

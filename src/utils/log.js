@@ -14,9 +14,9 @@ class Logger {
     return `${year}-${month}-${day}`;
   }
 
-  logSearch(query) {
+  logSearch(userId, query) {
     const currentDate = this.getCurrentDate();
-    const logMessage = `[${currentDate}] USER SEARCHED FOR '${query}'`;
+    const logMessage = `[${currentDate}] USER ID: ${userId} - SEARCHED FOR '${query}'`;
 
     const logFilePath = path.join(this.logsFolderPath, `${currentDate}.log`);
 
@@ -26,6 +26,19 @@ class Logger {
 }
 
 module.exports = Logger;
+
+module.exports = Logger;
+const Logger = require("./path/to/Logger"); // Update the path accordingly
+
+// Create an instance of Logger with the desired logs folder path
+const logger = new Logger("./logs");
+
+// Simulate a user search and log it
+const userId = "user123";
+const query = "example search query";
+logger.logSearch(userId, query);
+
+// You can repeat the above logSearch call whenever a user performs a search
 
 //const Logger = require('./log'); // Replace //with actual path to log.js
 

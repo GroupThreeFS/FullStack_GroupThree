@@ -4,6 +4,8 @@ const rainbowText = require('../src/utils/rainbowtext'); // Import the rainbowTe
 
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+require('../src/config/mongodb');
+require('../src/config/postgres');
 const express = require('express');
 const searchRoutes = require('../src/routes/search');
 const apiRoutes = require('../src/routes/apiRoutes');

@@ -8,15 +8,16 @@ exports.getAllGames = async (req, res) => {
         let games;
         if (req.query.db === 'postgres') {
             games = await postgresDAL.getAllGames();
-         }// else if (req.query.db === 'mongo') {
-        //     games = await mongoDAL.getAllGames();
-        // } else {
-        //     const postgresGames = await postgresDAL.getAllGames();
-        //     const mongoGames = await mongoDAL.getAllGames();
-        //     games = [...postgresGames, ...mongoGames];
-        // }
+         }else if (req.query.db === 'mongo') {
+             games = await mongoDAL.getAllGames();
+         }else {
+             const postgresGames = await postgresDAL.getAllGames();
+             const mongoGames = await mongoDAL.getAllGames();
+             games = [...postgresGames, ...mongoGames];
+        }
         res.json(games);
     } catch (error) {
+        console.error("Error fetching games:", error);
         res.status(500).json({ error: 'Failed to fetch games' });
     }
 };

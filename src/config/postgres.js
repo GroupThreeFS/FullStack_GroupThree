@@ -1,8 +1,9 @@
-/*This is where PostgreSQL connection settings will go*/
-const { Pool } = require('pg');
-const chalk = require('chalk');
-const rainbowText = require('../utils/rainbowtext'); // Import the rainbowText utility
+// Import the required modules
+const { Pool } = require("pg");
+const chalk = require("chalk");
+const rainbowText = require("../utils/rainbowtext"); // Import the rainbowText utility
 
+// Create a new connection pool with PostgreSQL connection settings
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
   port: process.env.POSTGRES_PORT,
@@ -11,12 +12,18 @@ const pool = new Pool({
   database: process.env.POSTGRES_DB,
 });
 
+// Connect to the PostgreSQL database using the connection pool
 pool.connect((err) => {
   if (err) {
-    console.error(chalk.red('Error connecting to PostgreSQL:'), err);
+    // If there's an error during connection, log the error using chalk for styling
+    console.error(chalk.red("Error connecting to PostgreSQL:"), err);
   } else {
-    console.log(chalk.green('+ Connected to') + ' ' + rainbowText('PostgreSQL'));
+    // If the connection is successful, log a success message with colorful text
+    console.log(
+      chalk.green("+ Connected to") + " " + rainbowText("PostgreSQL")
+    );
   }
 });
 
+// Export the connection pool to be used in other parts of the application
 module.exports = pool;

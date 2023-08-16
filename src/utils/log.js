@@ -2,10 +2,13 @@ const fs = require("fs");
 const path = require("path");
 
 class Logger {
+  // Constructor to initialize the logs folder path
   constructor(logsFolderPath) {
+    // Set the logs folder path; if not provided, use default "./logs"
     this.logsFolderPath = logsFolderPath || "./logs";
   }
 
+  // Helper function to get the current date in "YYYY-MM-DD" format
   getCurrentDate() {
     const now = new Date();
     const year = now.getFullYear();
@@ -14,13 +17,21 @@ class Logger {
     return `${year}-${month}-${day}`;
   }
 
+  // Method to log a user's search query
   logSearch(userId, query) {
+    // Get the current date in "YYYY-MM-DD" format
     const currentDate = this.getCurrentDate();
+
+    // Construct the log message with user ID and search query
     const logMessage = `[${currentDate}] USER ID: ${userId} - SEARCHED FOR '${query}'`;
 
+    // Create the log file path using the current date
     const logFilePath = path.join(this.logsFolderPath, `${currentDate}.log`);
 
+    // Create the logs folder if it doesn't exist (recursive: true ensures nested directories are created)
     fs.mkdirSync(this.logsFolderPath, { recursive: true });
+
+    // Append the log message to the log file
     fs.appendFileSync(logFilePath, logMessage + "\n");
   }
 }

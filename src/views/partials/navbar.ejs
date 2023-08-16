@@ -1,27 +1,30 @@
-<div>
+<div class="dropdown">
     <h3>API NAVIGATION</h3>
-    <label for="dbType">Select Database:</label>
-    <select id="dbType">
-        <option value="postgres">Postgres</option>
-        <option value="mongo">Mongo</option>
-        <option value="both">Both</option>
-    </select>
+    <button id="dropdownToggle" class="dropdown-toggle">▼</button>
+    <div class="dropdown-content">
+        <label for="dbType">Select Database:</label>
+        <select id="dbType">
+            <option value="postgres">Postgres</option>
+            <option value="mongo">Mongo</option>
+            <option value="both">Both</option>
+        </select>
 
-    <% const endpoints = ['Games', 'Developers', 'Consoles', 'Games/{id}/Developer', 'Games/{id}/Console']; %>
-    <% endpoints.forEach(endpoint => { %>
-        <div>
-            <label for="<%= endpoint %>Id">Select ID for <%= endpoint %> (if applicable):</label>
-            <select id="<%= endpoint %>Id">
-                <% if (endpoint !== 'Games/{id}/Developer' && endpoint !== 'Games/{id}/Console') { %>
-                    <option value="all">All</option>
-                <% } %>
-                <% for (let i = 1; i <= 1000; i++) { %>
-                    <option value="<%= i %>"><%= i %></option>
-                <% } %>
-            </select>
-            <button onclick="navigateTo('<%= endpoint %>')">Go to <%= endpoint %></button>
-        </div>
-    <% }); %>
+        <% const endpoints = ['Games', 'Developers', 'Consoles', 'Games/{id}/Developer', 'Games/{id}/Console']; %>
+        <% endpoints.forEach(endpoint => { %>
+            <div>
+                <label for="<%= endpoint %>Id">Select ID for <%= endpoint %> (if applicable):</label>
+                <select id="<%= endpoint %>Id">
+                    <% if (endpoint !== 'Games/{id}/Developer' && endpoint !== 'Games/{id}/Console') { %>
+                        <option value="all">All</option>
+                    <% } %>
+                    <% for (let i = 1; i <= 1000; i++) { %>
+                        <option value="<%= i %>"><%= i %></option>
+                    <% } %>
+                </select>
+                <button onclick="navigateTo('<%= endpoint %>')">Go to <%= endpoint %></button>
+            </div>
+        <% }); %>
+    </div>
 </div>
 
 <script>

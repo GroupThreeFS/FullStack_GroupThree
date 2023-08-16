@@ -207,3 +207,10 @@ a:hover {
     width: 100%;
 }
 
+body {
+    /* ... (your existing styles for body) ... */
+    background-image: url('/images/Background.png');
+    background-size: cover; /* This will cover the entire viewport */
+    background-repeat: no-repeat; /* This will prevent the image from repeating */
+    background-attachment: fixed; /* This will fix the background image position while scrolling */
+}

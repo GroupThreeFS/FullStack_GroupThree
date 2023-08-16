@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const searchController = require('../controllers/searchController');
-const { generateUrl } = require('../utils/apiNav');
+const searchController = require("../controllers/searchController");
+const { generateUrl } = require("../utils/apiNav");
 
-router.get('/', (req, res) => {
-    res.render('query');
+// Route to render the query page
+router.get("/", (req, res) => {
+  res.render("query"); // Render the 'query' view template
 });
 
-router.get('/results', searchController.searchGames); // New route for search results
+// Route to handle search results
+router.get("/results", searchController.searchGames);
 
+// Export the router to be used in the main Express application
 module.exports = router;

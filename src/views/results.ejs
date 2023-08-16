@@ -1,1 +1,32 @@
-/*Results from searching*/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <h2>Search Results</h2>
+    <ul>
+        <% results.forEach(game => { %>
+            <li>
+                <strong>Game Name:</strong> <%= game["Game Name"] %><br>
+                <strong>Release Date:</strong> <%= game["Release Date"] %><br>
+                <strong>Players:</strong> <%= game.Players %><br>
+                <strong>Genre:</strong> <%= game.Genre %><br>
+                <strong>Developer:</strong> <%= game.DeveloperName %><br>
+                <strong>Rating:</strong> <%= game.Rating %>
+            </li>
+        <% }); %>
+    </ul>
+    <div>
+        <% if (page > 1) { %>
+            <a href="/search/results?query=<%= query %>&db=<%= db %>&page=<%= page - 1 %>">Previous</a>
+        <% } %>
+        <% if (page < totalPages) { %>
+            <a href="/search/results?query=<%= query %>&db=<%= db %>&page=<%= page + 1 %>">Next</a>
+        <% } %>
+    </div>
+</body>
+</html>

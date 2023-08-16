@@ -147,3 +147,50 @@ exports.getConsoleById = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch console by ID' });
     }
 };
+
+exports.searchGames = async (req, res) => {
+    try {
+        let results;
+        const query = req.query.query || ""; // Get the search query
+
+        if (!query) {
+            if (req.query.db === 'postgres') {
+                results = await postgresDAL.getAllGamesWithDetails();
+            } else if (req.query.db === 'mongo') {
+                results = await mongoDAL.searchAllGames(); // Use the new function here
+            } else {
+                const postgresResults = await postgresDAL.getAllGamesWithDetails();
+                const mongoResults = await mongoDAL.searchAllGames(); // And here
+                results = [...postgresResults, ...mongoResults];
+            }
+        } else {
+            if (req.query.db === 'postgres') {
+                results = await postgresDAL.searchGames(query);
+            } else if (req.query.db === 'mongo') {
+                results = await mongoDAL.searchGames(query);
+            } else {
+                const postgresResults = await postgresDAL.searchGames(query);
+                const mongoResults = await mongoDAL.searchGames(query);
+                results = [...postgresResults, ...mongoResults];
+            }
+        }
+
+        // Paginate results
+        const page = parseInt(req.query.page) || 1;
+        const limit = 10;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        const paginatedResults = results.slice(startIndex, endIndex);
+
+        res.render('results', { 
+            results: paginatedResults, 
+            page, 
+            totalPages: Math.ceil(results.length / limit),
+            query: query, // Pass the query variable here
+            db: req.query.db // Also pass the db variable
+        });
+    } catch (error) {
+        console.error("Error fetching search results:", error);
+        res.status(500).json({ error: 'Failed to fetch search results' });
+    }
+};

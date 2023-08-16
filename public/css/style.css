@@ -1,0 +1,77 @@
+body, h1, h2, h3, p, label, input, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: #000000;
+    background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+}
+
+.form-group {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #0350a3;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #0350a3;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #002d5e;
+    background: linear-gradient(to bottom, #0350a3, #003d7d);
+    transition: background-color 0.3s ease;
+}
+
+a {
+    color: #0350a3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.8;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #002d5e;
+    opacity: 1;
+}
+
+input {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+input:focus {
+    outline: none;
+    border-color: #0350a3;
+    box-shadow: 0px 0px 3px #0350a3;
+    background-color: #e0e0e0;
+}

@@ -164,3 +164,46 @@ a:hover {
 .back-button:hover {
     background-color: #002d5e;
 }
+
+@keyframes glowingText {
+    0% { 
+        color: red; 
+        text-shadow: 0 0 5px red; 
+        transform: scale(1);
+    }
+    20% { 
+        color: orange; 
+        text-shadow: 0 0 5px orange; 
+        transform: scale(1.1);
+    }
+    40% { 
+        color: yellow; 
+        text-shadow: 0 0 5px yellow; 
+        transform: scale(1.2);
+    }
+    60% { 
+        color: green; 
+        text-shadow: 0 0 5px green; 
+        transform: scale(1.1);
+    }
+    80% { 
+        color: blue; 
+        text-shadow: 0 0 5px blue; 
+        transform: scale(1);
+    }
+    100% { 
+        color: purple; 
+        text-shadow: 0 0 5px purple; 
+        transform: scale(0.9);
+    }
+}
+
+.glowing-text {
+    font-size: 2rem;
+    animation: glowingText 5s infinite alternate;
+    text-align: center;
+    margin-top: 20vh; /* Adjust this value to vertically center the text more or less */
+    display: block;
+    width: 100%;
+}
+

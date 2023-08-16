@@ -32,6 +32,12 @@ app.use('/api', apiRoutes);
 app.use('/search', searchRoutes);
 app.use('/', otherRoutes);
 
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).render('404');
+});
+
+
 // Error handling middleware
 app.use(errorHandling);
 

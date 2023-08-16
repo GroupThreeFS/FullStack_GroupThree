@@ -3,7 +3,7 @@ const path = require("path");
 
 class Logger {
   constructor(logsFolderPath) {
-    this.logsFolderPath = logsFolderPath || "./logs";
+    this.logsFolderPath = logsFolderPath || path.join(__dirname, '..', 'logs');
   }
 
   getCurrentDate() {
@@ -15,35 +15,40 @@ class Logger {
   }
 
   logSearch(userId, query) {
+    
     const currentDate = this.getCurrentDate();
     const logMessage = `[${currentDate}] USER ID: ${userId} - SEARCHED FOR '${query}'`;
 
     const logFilePath = path.join(this.logsFolderPath, `${currentDate}.log`);
+    console.log("Log file path:", logFilePath);
 
-    fs.mkdirSync(this.logsFolderPath, { recursive: true });
-    fs.appendFileSync(logFilePath, logMessage + "\n");
+    try {
+      fs.mkdirSync(this.logsFolderPath, { recursive: true });
+      fs.appendFileSync(logFilePath, logMessage + "\n");
+  } catch (err) {
+      console.error("Error writing to log file:", err);
+  }
   }
 }
 
 module.exports = Logger;
 
-module.exports = Logger;
-const Logger = require("./path/to/Logger"); // Update the path accordingly
+// const Logger = require("./path/to/Logger"); // Update the path accordingly
 
-// Create an instance of Logger with the desired logs folder path
-const logger = new Logger("./logs");
+// // Create an instance of Logger with the desired logs folder path
+// const logger = new Logger("./logs");
 
-// Simulate a user search and log it
-const userId = "user123";
-const query = "example search query";
-logger.logSearch(userId, query);
+// // Simulate a user search and log it
+// const userId = "user123";
+// const query = "example search query";
+// logger.logSearch(userId, query);
 
-// You can repeat the above logSearch call whenever a user performs a search
+// // You can repeat the above logSearch call whenever a user performs a search
 
-//const Logger = require('./log'); // Replace //with actual path to log.js
+// //const Logger = require('./log'); // Replace //with actual path to log.js
 
-//const logger = new Logger('./logs'); // //Provide your logs folder path here
+// //const logger = new Logger('./logs'); // //Provide your logs folder path here
 
-//const searchQuery = 'eggs'; // Replace with //the actual search query
+// //const searchQuery = 'eggs'; // Replace with //the actual search query
 
-//logger.logSearch(searchQuery);
+// //logger.logSearch(searchQuery);

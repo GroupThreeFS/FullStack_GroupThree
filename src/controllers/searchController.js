@@ -1,5 +1,6 @@
 /*May contain the logic for each route*/
-
+const Logger = require('../utils/log');
+const logger = new Logger();
 const postgresDAL = require('../models/postgres/apiDAL');
 const mongoDAL = require('../models/mongo/apiDAL');
 
@@ -152,7 +153,9 @@ exports.searchGames = async (req, res) => {
     try {
         let results;
         const query = req.query.query || ""; // Get the search query
-
+        const userId = "anon"; // Placeholder for user ID
+        logger.logSearch(userId, query);
+        
         if (!query) {
             if (req.query.db === 'postgres') {
                 results = await postgresDAL.getAllGamesWithDetails();

@@ -6,6 +6,7 @@
     <title>Search Page</title>
 </head>
 <body>
+    <%- include('partials/navbar') %>
     <form action="/search" method="GET">
         <select name="db">
             <option value="postgres">Postgres</option>
@@ -15,5 +16,6 @@
         <input type="text" name="query" placeholder="Search...">
         <button type="submit">Search</button>
     </form>
+    
 </body>
 </html>

@@ -58,3 +58,46 @@ exports.getConsoleById = async (consoleId) => {
   const { rows } = await pool.query(query, [consoleId]);
   return rows[0];
 };
+
+exports.searchGames = async (query) => {
+  const regex = `%${query}%`; // SQL LIKE query
+
+  const gamesQuery = `
+      SELECT g.GameName, c.ReleaseDate, g.Players, g.Genre, d.DeveloperName, g.GameRating 
+      FROM Games g
+      JOIN Developers d ON g.DeveloperID = d.DeveloperID
+      JOIN Consoles c ON g.PlatformID = c.PlatformID
+      WHERE g.GameName ILIKE $1 OR g.Genre ILIKE $1 OR g.Players::TEXT ILIKE $1 OR g.ReleaseYear::TEXT ILIKE $1 OR g.GameRating::TEXT ILIKE $1 OR d.DeveloperName ILIKE $1 OR c.Platform ILIKE $1
+  `;
+
+  const { rows } = await pool.query(gamesQuery, [regex]);
+  
+  return rows.map(game => ({
+    "Game Name": game.gamename,
+    "Release Date": game.releasedate, // You might want to format this to match MongoDB's format
+    "Players": game.players,
+    "Genre": game.genre,
+    "DeveloperName": game.developername,
+    "Rating": game.gamerating
+  }));
+};
+
+exports.getAllGamesWithDetails = async () => {
+  const gamesQuery = `
+      SELECT g.GameName, c.ReleaseDate, g.Players, g.Genre, d.DeveloperName, g.GameRating 
+      FROM Games g
+      JOIN Developers d ON g.DeveloperID = d.DeveloperID
+      JOIN Consoles c ON g.PlatformID = c.PlatformID
+  `;
+
+  const { rows } = await pool.query(gamesQuery);
+  
+  return rows.map(game => ({
+    "Game Name": game.gamename,
+    "Release Date": game.releasedate,
+    "Players": game.players,
+    "Genre": game.genre,
+    "DeveloperName": game.developername,
+    "Rating": game.gamerating
+  }));
+};

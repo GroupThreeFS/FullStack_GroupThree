@@ -107,3 +107,63 @@ exports.getConsoleById = async (platformid) => {
     }
 };
 
+exports.searchGames = async (query) => {
+    const gameCollection = db.collection('Game');
+    const developerCollection = db.collection('Developer');
+    const consoleCollection = db.collection('Console');
+
+    const regex = new RegExp(query, 'i'); // Case-insensitive search
+
+    const games = await gameCollection.find({
+        $or: [
+            { Name: regex },
+            { Genre: regex },
+            { Players: regex.toString() }, // Convert to string for matching
+            { Year: regex.toString() }, // Convert to string for matching
+            { GameRating: regex.toString() } // Convert to string for matching
+        ]
+    }).toArray();
+
+    const results = [];
+    for (const game of games) {
+        const developer = await developerCollection.findOne({ DeveloperID: game.DevevloperID });
+        const consoleData = await consoleCollection.findOne({ PlatformID: game.ConsoleID });
+
+        results.push({
+            "Game Name": game.Name,
+            "Release Date": consoleData.ReleaseDate,
+            "Players": game.Players,
+            "Genre": game.Genre,
+            "DeveloperName": developer.Name,
+            "Rating": game.GameRating
+        });
+    }
+
+    return results;
+};
+
+
+exports.searchAllGames = async () => {
+    const gameCollection = db.collection('Game');
+    const developerCollection = db.collection('Developer');
+    const consoleCollection = db.collection('Console');
+
+    const games = await gameCollection.find({}).toArray();
+
+    const results = [];
+    for (const game of games) {
+        const developer = await developerCollection.findOne({ DeveloperID: game.DevevloperID });
+        const consoleData = await consoleCollection.findOne({ PlatformID: game.ConsoleID });
+
+        results.push({
+            "Game Name": game.Name,
+            "Release Date": consoleData.ReleaseDate,
+            "Players": game.Players,
+            "Genre": game.Genre,
+            "DeveloperName": developer.Name,
+            "Rating": game.GameRating
+        });
+    }
+
+    return results;
+};

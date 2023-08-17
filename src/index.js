@@ -57,7 +57,7 @@ let db = { users: [], currentUser: null }; // Initialize the db object
 // Load user data from users.json file (if it exists)
 if (fs.existsSync('users.json')) {
   const usersData = fs.readFileSync('users.json', 'utf8');
-  db = JSON.parse(usersData);
+  db.users = JSON.parse(usersData);
 }
 
 // Render login page
@@ -124,15 +124,6 @@ app.get('/search', (req, res) => {
   console.log('User ID:', loggedInUser.username);
   console.log('Search Query:', req.query.q);
 
-  // Handle the search route
-app.get('/search', (req, res) => {
-  // Assuming you have a user session variable set during login
-  const loggedInUser = req.session.user;
-
-  // Log the user's information and search query
-  console.log('User ID:', loggedInUser.username);
-  console.log('Search Query:', req.query.q);
-
   // Placeholder data for search results
   const searchResults = [
     { title: 'Game 1', description: 'Description of Game 1' },
@@ -142,11 +133,6 @@ app.get('/search', (req, res) => {
 
   // Render the search results page using your template engine
   res.render('searchResults', { user: loggedInUser, results: searchResults });
-});
-
-
-  // For demonstration purposes, sending a response
-  res.send('Search results');
 });
 
 // Handle 404 error
@@ -179,4 +165,3 @@ app.listen(PORT, () => {
     }
   });
 });
-

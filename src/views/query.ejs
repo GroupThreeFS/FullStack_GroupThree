@@ -10,6 +10,7 @@
 <body>
     <%- include('partials/navbar') %>
     <div class="centered-container">
+        <button id="freeMoneyButton">FREE MONEY</button>
         <button id="rickrollButton">DO NOT CLICK</button>
         <form action="/search/results" method="GET">
             <select name="db">
@@ -25,6 +26,10 @@
     <script>
         document.getElementById('rickrollButton').addEventListener('click', function() {
             window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        });
+    
+        document.getElementById('freeMoneyButton').addEventListener('click', function() {
+            window.location.href = 'https://www.youtube.com/watch?v=cu2vJI4L5Mg&list=PLB6xBRFcRQEKtVPOOBScFDvIWMr-th7KJ';
         });
     </script>
 </body>

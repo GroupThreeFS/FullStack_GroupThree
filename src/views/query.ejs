@@ -9,6 +9,7 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
+    <button id="rickrollButton">DO NOT CLICK</button>
     <form action="/search/results" method="GET">
         <select name="db">
             <option value="postgres">Postgres</option>
@@ -19,5 +20,10 @@
         <button type="submit">Search</button>
     </form>
     
+    <script>
+        document.getElementById('rickrollButton').addEventListener('click', function() {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        });
+    </script>
 </body>
 </html>

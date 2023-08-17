@@ -32,6 +32,7 @@ input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    box-sizing: border-box;
 }
 
 button {
@@ -44,6 +45,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 button:hover {
@@ -66,7 +68,9 @@ a:hover {
 }
 
 input {
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    padding: 18px 25px;
+    width: 100%; 
 }
 
 input:focus {
@@ -218,14 +222,18 @@ body {
 #rickrollButton {
     display: block;
     margin: 20px auto;
-    padding: 20px 40px;
-    font-size: 24px;
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 11px;
     background-color: red;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     animation: flashing 1s infinite alternate;
+    width: 100px; /* Adjusted width */
+    height: 30px; /* Adjusted height */
+    line-height: 20px; /* To vertically center the text */
+    text-align: center; /* To horizontally center the text */
 }
 
 @keyframes flashing {
@@ -235,4 +243,15 @@ body {
     to {
         opacity: 0.5;
     }
+}
+
+.centered-container {
+    max-width: 400px; /* Adjust this value as needed */
+    margin: 50px auto; /* Vertical margin of 50px and auto horizontal margin to center the container */
+    text-align: center; /* Center the inline elements */
+}
+
+form select, form input, form button {
+    width: 100%; /* Full width of the parent container */
+    margin-bottom: 10px; /* Some spacing between the elements */
 }

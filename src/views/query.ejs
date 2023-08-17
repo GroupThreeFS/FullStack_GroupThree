@@ -9,16 +9,18 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
-    <button id="rickrollButton">DO NOT CLICK</button>
-    <form action="/search/results" method="GET">
-        <select name="db">
-            <option value="postgres">Postgres</option>
-            <option value="mongo">Mongo</option>
-            <option value="both">Both</option>
-        </select>
-        <input type="text" name="query" placeholder="Search...">
-        <button type="submit">Search</button>
-    </form>
+    <div class="centered-container">
+        <button id="rickrollButton">DO NOT CLICK</button>
+        <form action="/search/results" method="GET">
+            <select name="db">
+                <option value="postgres">Postgres</option>
+                <option value="mongo">Mongo</option>
+                <option value="both">Both</option>
+            </select>
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
     
     <script>
         document.getElementById('rickrollButton').addEventListener('click', function() {
